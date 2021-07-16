@@ -15,11 +15,11 @@
 
       <section>
         <ul class="book-list">
-          <li>
+          <li v-for="book of books" :key="book.id">
             <div class="panel">
-              <img class="img" src="https://img.r7.com/images/dia-internacional-do-gato-instagram-08082019161529430?dimensions=771x420&no_crop=true" alt="">
-              <h3>R$ 23.56</h3>
-              <p>Gato astrounauta</p>
+              <img class="img" :src="'http://localhost:8000/'+book.cover">
+              <h3>R$ {{ book.sale_price }}</h3>
+              <p>{{ book.title }}</p>
               <b-button variant="warning">Comprar</b-button>
             </div>
           </li>
@@ -38,6 +38,17 @@ import { BNavbarNav } from 'bootstrap-vue';
 import { BNavbarBrand } from 'bootstrap-vue';
 import { BButton } from 'bootstrap-vue';
 export default {
+  data() {
+    return {
+      books: [],
+    }
+  },
+  created() {
+    const axios = require('axios');
+
+    axios.get('http://localhost:8000/api/books?')
+      .then(res => this.books = res.data);
+  },
   components: {
     'b-container': BContainer,
     'b-jumbotron': BJumbotron,
