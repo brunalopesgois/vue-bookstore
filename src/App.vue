@@ -63,8 +63,8 @@ export default {
   created() {
     const axios = require('axios');
 
-    axios.get('http://localhost:8000/api/books?')
-      .then(res => this.books = res.data);
+    axios.get('http://localhost:8000/api/books')
+      .then(res => this.books = res.data.data);
   },
   components: {
     'b-container': BContainer,
