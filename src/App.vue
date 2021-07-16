@@ -1,16 +1,15 @@
 <template>
   <div id="app">
       <header>
-        <b-jumbotron bg-variant="warning" text-variant="black">
+        <b-jumbotron class="d-flex justify-content-center" bg-variant="warning" text-variant="black">
           <template #header>Livraria ABC</template>
-
+        </b-jumbotron>
         <nav>
           <b-navbar class="d-flex justify-content-between" toggleable="lg" type="dark" variant="dark">
             <b-navbar-brand href="#">Home</b-navbar-brand>
             <b-navbar-brand href="#">Entrar</b-navbar-brand>
           </b-navbar>
         </nav>
-        </b-jumbotron>
       </header>
 
       <b-container fluid>
@@ -111,6 +110,6 @@ export default {
 .btn-alignment {
   position: absolute;
   bottom: 15px;
-  left: 75px;
+  left: 83px;
 }
 </style>
