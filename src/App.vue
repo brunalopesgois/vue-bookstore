@@ -7,9 +7,7 @@
         <nav>
           <b-navbar class="d-flex justify-content-between" toggleable="lg" type="dark" variant="dark">
             <b-navbar-brand href="#">Home</b-navbar-brand>
-            <b-navbar-nav class="ml-auto">
-              <b-nav-item href="#">Log In</b-nav-item>
-            </b-navbar-nav>
+            <b-navbar-brand href="#">Entrar</b-navbar-brand>
           </b-navbar>
         </nav>
         </b-jumbotron>
