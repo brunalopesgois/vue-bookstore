@@ -1,16 +1,6 @@
 <template>
   <div id="app">
-      <header>
-        <b-jumbotron class="d-flex justify-content-center" bg-variant="warning" text-variant="black">
-          <template #header>Livraria ABC</template>
-        </b-jumbotron>
-        <nav>
-          <b-navbar class="d-flex justify-content-between" toggleable="lg" type="dark" variant="dark">
-            <b-navbar-brand href="#">Home</b-navbar-brand>
-            <b-navbar-brand href="#">Entrar</b-navbar-brand>
-          </b-navbar>
-        </nav>
-      </header>
+      <my-header></my-header>
 
       <b-container fluid>
         <section>
@@ -48,12 +38,9 @@
 
 <script>
 import { BContainer } from 'bootstrap-vue';
-import { BJumbotron } from 'bootstrap-vue';
-import { BNavbar } from 'bootstrap-vue';
-import { BNavbarNav } from 'bootstrap-vue';
-import { BNavbarBrand } from 'bootstrap-vue';
 import { BButton } from 'bootstrap-vue';
 import { BButtonGroup } from 'bootstrap-vue';
+import Header from '../src/components/shared/header/Header.vue';
 export default {
   data() {
     return {
@@ -68,12 +55,9 @@ export default {
   },
   components: {
     'b-container': BContainer,
-    'b-jumbotron': BJumbotron,
-    'b-navbar': BNavbar,
-    'b-navbar-nav': BNavbarNav,
-    'b-navbar-brand': BNavbarBrand,
     'b-button': BButton,
-    'b-button-group': BButtonGroup
+    'b-button-group': BButtonGroup,
+    'my-header': Header
   }
 }
 </script>
