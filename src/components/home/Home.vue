@@ -14,7 +14,7 @@
     <section class="section">
       <ul class="book-list">
         <li class="book-list-item" v-for="book of filteredBooks" :key="book.id">
-          <my-panel :content="book"></my-panel>
+          <my-panel @remove="remove" :content="book"></my-panel>
         </li>
       </ul>
     </section>
@@ -24,6 +24,7 @@
 <script>
 import { BContainer } from 'bootstrap-vue';
 import Panel from '../shared/panel/Panel.vue';
+import axios from 'axios';
 export default {
   data() {
     return {
@@ -42,7 +43,18 @@ export default {
       return this.books;
     }
   },
+  methods: {
+    remove(book) {
+        axios.delete(`http://localhost:8000/api/books/${book.id}`)
+          .then(res => {
+            alert('Livro removido com sucesso');
+            let index = this.books.indexOf(book);
+            this.books.splice(index, 1);
+          });
+    }
+  },
   created() {
+
     const axios = require('axios');
 
     axios.get('http://localhost:8000/api/books')

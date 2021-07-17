@@ -5,7 +5,7 @@
         <b-button variant="info" :to="'/register/'+content.id">
           <img src="/src/assets/edit-icon.png">
         </b-button>
-        <b-button variant="danger">
+        <b-button variant="danger" @click="deleteBook(content)">
           <img src="/src/assets/exit-icon.png">
         </b-button>
       </b-button-group>
@@ -26,10 +26,22 @@
 import { BButton } from 'bootstrap-vue';
 import { BButtonGroup } from 'bootstrap-vue';
 export default {
+  data() {
+    return {
+
+    }
+  },
   props: ['content'],
   components: {
     'b-button': BButton,
     'b-button-group': BButtonGroup
+  },
+  methods: {
+    deleteBook(book) {
+      if (confirm(`Deseja realmente remover o livro ${book.title}?`)) {
+        this.$emit('remove', book);
+      }
+    }
   }
 }
 </script>
