@@ -1,8 +1,15 @@
 <template>
   <b-container fluid>
-    <div class="searchbox d-flex justify-content-end">
-      <b-form-input v-model="filter" class="searchbox-input" placeholder="Buscar"></b-form-input>
-      <img class="searchbox-img" src="/src/assets/search-icon.png">
+    <div class="top-section">
+      <div class="admin-register-btn">
+        <b-button variant="primary" to="/register">
+          + Novo Livro
+        </b-button>
+      </div>
+      <div class="searchbox d-flex justify-content-end">
+        <b-form-input v-model="filter" class="searchbox-input" placeholder="Buscar"></b-form-input>
+        <img class="searchbox-img" src="/src/assets/search-icon.png">
+      </div>
     </div>
     <section class="section">
       <ul class="book-list">
@@ -49,9 +56,19 @@ export default {
 </script>
 
 <style>
+.top-section {
+  display: flex;
+}
+.section {
+  background-color: #E9E9E9;
+}
+.admin-register-btn {
+  width: 100%;
+  padding-left: 40px;
+}
 .searchbox {
   width: 100%;
-  padding-bottom: 40px;
+  padding-bottom: 20px;
   padding-right: 40px;
 }
 .searchbox .searchbox-input {

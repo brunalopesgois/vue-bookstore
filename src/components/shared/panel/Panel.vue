@@ -2,7 +2,7 @@
   <div class="panel">
     <div class="panel-admin-buttons">
       <b-button-group size="sm">
-        <b-button variant="info">
+        <b-button variant="info" :to="'/register/'+content.id">
           <img src="/src/assets/edit-icon.png">
         </b-button>
         <b-button variant="danger">
@@ -40,6 +40,7 @@ export default {
   padding: 10px;
   border: solid 2px black;
   display: inline-block;
+  margin-top: 15px;
   margin-left: 15px;
   margin-bottom: 15px;
   width: 260px;
@@ -47,6 +48,7 @@ export default {
   min-height: 500px;
   max-height: 500px;
   vertical-align: top;
+  background-color: white;
 }
 .panel-admin-buttons {
   text-align: end;

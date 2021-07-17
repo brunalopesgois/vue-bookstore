@@ -1,8 +1,8 @@
 <template>
   <nav>
     <b-navbar class="navbar d-flex justify-content-between" toggleable="lg" type="dark" variant="dark">
-      <b-navbar-brand href="#">Home</b-navbar-brand>
-      <b-navbar-brand href="#">Entrar</b-navbar-brand>
+      <b-navbar-brand to="/">Home</b-navbar-brand>
+      <b-navbar-brand to="/sign-in">Entrar</b-navbar-brand>
     </b-navbar>
   </nav>
 </template>
