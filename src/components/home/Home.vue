@@ -1,12 +1,12 @@
 <template>
   <b-container fluid>
     <div class="searchbox d-flex justify-content-end">
-      <b-form-input class="searchbox-input" placeholder="Buscar"></b-form-input>
+      <b-form-input v-model="filter" class="searchbox-input" placeholder="Buscar"></b-form-input>
       <img class="searchbox-img" src="/src/assets/search-icon.png">
     </div>
     <section class="section">
       <ul class="book-list">
-        <li class="book-list-item" v-for="book of books" :key="book.id">
+        <li class="book-list-item" v-for="book of filteredBooks" :key="book.id">
           <my-panel :content="book"></my-panel>
         </li>
       </ul>
@@ -21,6 +21,18 @@ export default {
   data() {
     return {
       books: [],
+      filter: ''
+    }
+  },
+  computed: {
+    filteredBooks() {
+      if (this.filter) {
+        return this.books.filter((book) => {
+          return book.title.match(new RegExp(this.filter, "i"));
+        });
+      };
+
+      return this.books;
     }
   },
   created() {
