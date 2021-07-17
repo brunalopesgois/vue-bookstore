@@ -1,10 +1,16 @@
 <template>
   <b-container fluid>
-    <ul class="book-list">
-      <li class="book-list-item" v-for="book of books" :key="book.id">
-        <my-panel :content="book"></my-panel>
-      </li>
-    </ul>
+    <div class="searchbox d-flex justify-content-end">
+      <b-form-input class="searchbox-input" placeholder="Buscar"></b-form-input>
+      <img class="searchbox-img" src="/src/assets/search-icon.png">
+    </div>
+    <section class="section">
+      <ul class="book-list">
+        <li class="book-list-item" v-for="book of books" :key="book.id">
+          <my-panel :content="book"></my-panel>
+        </li>
+      </ul>
+    </section>
   </b-container>
 </template>
 
@@ -31,8 +37,24 @@ export default {
 </script>
 
 <style>
+.section {
+  width: 95%;
+}
+.searchbox {
+  width: 100%;
+  padding: 40px;
+}
+.searchbox .searchbox-input {
+  width: 260px;
+}
+.searchbox-img {
+  max-width: 100%;
+  height: auto;
+  padding-left: 5px;
+}
 .book-list {
   list-style: none;
+  margin-left: 65px;
 }
 .book-list .book-list-item {
   display: inline-block;

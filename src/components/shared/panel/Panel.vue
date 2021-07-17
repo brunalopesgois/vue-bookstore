@@ -40,7 +40,8 @@ export default {
   padding: 10px;
   border: solid 2px black;
   display: inline-block;
-  margin: 15px;
+  margin-left: 15px;
+  margin-bottom: 15px;
   width: 260px;
   height: 100%;
   min-height: 500px;
