@@ -49,12 +49,10 @@ export default {
 </script>
 
 <style>
-.section {
-  width: 95%;
-}
 .searchbox {
   width: 100%;
-  padding: 40px;
+  padding-bottom: 40px;
+  padding-right: 40px;
 }
 .searchbox .searchbox-input {
   width: 260px;

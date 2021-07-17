@@ -19,4 +19,7 @@ export default {
 </script>
 
 <style>
+.header {
+  margin-bottom: 40px;
+}
 </style>
