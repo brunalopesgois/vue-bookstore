@@ -2,7 +2,7 @@
   <div class="panel">
     <div class="panel-admin-buttons">
       <b-button-group size="sm">
-        <b-button variant="info" :to="'/register/'+content.id">
+        <b-button variant="info" :to="{ name: 'update', params: { id: content.id } }">
           <img src="/src/assets/edit-icon.png">
         </b-button>
         <b-button variant="danger" @click="deleteBook(content)">

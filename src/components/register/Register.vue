@@ -102,6 +102,7 @@ export default {
         price: '',
         file: null
       },
+      id: this.$route.params.id
     }
   },
   methods: {
@@ -134,6 +135,9 @@ export default {
       this.form.price = '';
       this.$refs['file'].reset();
     }
+  },
+  created() {
+
   }
 }
 </script>

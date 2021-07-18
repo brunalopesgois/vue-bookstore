@@ -2,7 +2,7 @@
   <b-container fluid>
     <div class="top-section">
       <div class="admin-register-btn">
-        <b-button variant="primary" to="/register">
+        <b-button variant="primary" :to="{ name: 'register' }">
           + Novo Livro
         </b-button>
       </div>
