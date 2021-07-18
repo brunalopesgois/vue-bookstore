@@ -53,6 +53,9 @@
             id="input-2"
             v-model="form.price"
             type="number"
+            step="0.01"
+            min="0"
+            max="99"
             placeholder="Apenas números..."
             required
           ></b-form-input>
@@ -61,8 +64,8 @@
           id="input-group-5"
           label-for="file-1"
         >
-          <div class="mt-3">Selecione um arquivo: {{ form.file ? file.name : '' }}</div>
-          <b-form-file id="file-1" v-model="form.file" class="mt-3" plain></b-form-file>
+          <div class="mt-3">Selecione um arquivo: {{ form.file ? form.file.name : '' }}</div>
+          <b-form-file id="file-1" ref="file" v-model="form.file" class="mt-3" plain></b-form-file>
         </b-form-group>
         <div class="form-btn">
           <b-button type="submit" variant="primary">Cadastrar</b-button>
@@ -80,6 +83,7 @@ import { BFormGroup } from 'bootstrap-vue';
 import { BFormInput } from 'bootstrap-vue';
 import { BFormFile } from 'bootstrap-vue';
 import { BFormTextarea } from 'bootstrap-vue';
+import axios from 'axios';
 export default {
   components: {
     'b-container': BContainer,
@@ -97,12 +101,29 @@ export default {
         desc: '',
         price: '',
         file: null
-      }
+      },
     }
   },
   methods: {
     onSubmit(event) {
-      //
+      event.preventDefault();
+      let formData = new FormData();
+      formData.append('title', this.form.title);
+      formData.append('image', this.form.file);
+      formData.append('genre', this.form.genre);
+      formData.append('description', this.form.desc);
+      formData.append('sale_price', this.form.price);
+      axios.post('http://localhost:8000/api/books', formData, {
+        headers: {
+          'Content-Type': 'multipart/form-data'
+        }
+      })
+      .then(res => {
+        console.log(res.data);
+      })
+      .catch(e => {
+        console.log(e);
+      });
     },
     onReset(event) {
       event.preventDefault();
@@ -111,7 +132,7 @@ export default {
       this.form.genre = '';
       this.form.desc = '';
       this.form.price = '';
-      this.form.file = null;
+      this.$refs['file'].reset();
     }
   }
 }
