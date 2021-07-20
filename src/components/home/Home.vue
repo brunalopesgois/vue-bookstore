@@ -72,7 +72,7 @@ export default {
   display: flex;
 }
 .section {
-  background-color: #E9E9E9;
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 .admin-register-btn {
   width: 100%;
@@ -93,7 +93,7 @@ export default {
 }
 .book-list {
   list-style: none;
-  margin-left: 65px;
+  margin-left: 4%;
 }
 .book-list .book-list-item {
   display: inline-block;
