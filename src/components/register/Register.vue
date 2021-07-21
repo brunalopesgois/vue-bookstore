@@ -114,6 +114,28 @@ export default {
       formData.append('genre', this.form.genre);
       formData.append('description', this.form.desc);
       formData.append('sale_price', this.form.price);
+
+      this.createOrUpdate(formData, this.id);
+    },
+    createOrUpdate(formData, id) {
+      let response = '';
+      if (id) {
+        formData.append('_method', 'PUT');
+        axios.post(`http://localhost:8000/api/books/${this.id}`, formData, {
+          headers: {
+            'Content-Type': 'multipart/form-data'
+          }
+        })
+        .then(res => {
+          console.log(res.data);
+        })
+        .catch(e => {
+          console.log(e.response.data);
+        });
+
+        return;
+      }
+
       axios.post('http://localhost:8000/api/books', formData, {
         headers: {
           'Content-Type': 'multipart/form-data'
@@ -137,7 +159,15 @@ export default {
     }
   },
   created() {
-
+    if (this.id) {
+      axios.get(`http://localhost:8000/api/books/${this.id}`)
+      .then(res => {
+        this.form.title = res.data.title,
+        this.form.genre = res.data.genre,
+        this.form.desc = res.data.description,
+        this.form.price = res.data.sale_price
+      });
+    }
   }
 }
 </script>
