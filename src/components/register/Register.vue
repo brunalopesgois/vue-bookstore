@@ -1,6 +1,6 @@
 <template>
   <b-container fluid>
-    <div class="register-section">
+    <my-section>
       <b-form @submit="onSubmit" @reset="onReset">
         <b-form-group
           id="input-group-1"
@@ -41,6 +41,7 @@
           placeholder="Era uma vez..."
           rows="3"
           max-rows="6"
+          required
         ></b-form-textarea>
         </b-form-group>
         <br>
@@ -72,7 +73,7 @@
           <b-button type="reset" variant="danger">Limpar</b-button>
         </div>
       </b-form>
-    </div>
+    </my-section>
   </b-container>
 </template>
 
@@ -84,6 +85,7 @@ import { BFormInput } from 'bootstrap-vue';
 import { BFormFile } from 'bootstrap-vue';
 import { BFormTextarea } from 'bootstrap-vue';
 import axios from 'axios';
+import Section from '../shared/section/Section.vue';
 export default {
   components: {
     'b-container': BContainer,
@@ -91,7 +93,8 @@ export default {
     'b-form-group': BFormGroup,
     'b-form-input': BFormInput,
     'b-form-file': BFormFile,
-    'b-form-textarea': BFormTextarea
+    'b-form-textarea': BFormTextarea,
+    'my-section': Section
   },
   data() {
     return {

@@ -7,7 +7,7 @@
         </b-button>
       </div>
       <div class="searchbox d-flex justify-content-end">
-        <b-form-input v-model="filter" class="searchbox-input" placeholder="Buscar"></b-form-input>
+        <b-form-input type="search" v-model="filter" class="searchbox-input" placeholder="Buscar"></b-form-input>
         <img class="searchbox-img" src="/src/assets/search-icon.png">
       </div>
     </div>
