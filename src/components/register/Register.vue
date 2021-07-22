@@ -1,5 +1,20 @@
 <template>
   <b-container fluid>
+    <b-alert
+      :show="dismissSuccessCountDown"
+      fade
+      variant="success"
+    >
+      <div v-if="this.id">Livro alterado com sucesso!</div>
+      <div v-else>Livro cadastrado com sucesso!</div>
+    </b-alert>
+    <b-alert
+      :show="dismissFailCountDown"
+      fade
+      variant="danger"
+    >
+      Ops... ocorreu um erro, tente novamente mais tarde!
+    </b-alert>
     <my-section>
       <b-form @submit="onSubmit" @reset="onReset">
         <b-form-group
@@ -86,6 +101,7 @@ import { BFormFile } from 'bootstrap-vue';
 import { BFormTextarea } from 'bootstrap-vue';
 import axios from 'axios';
 import Section from '../shared/section/Section.vue';
+import { BAlert } from 'bootstrap-vue';
 export default {
   components: {
     'b-container': BContainer,
@@ -94,7 +110,8 @@ export default {
     'b-form-input': BFormInput,
     'b-form-file': BFormFile,
     'b-form-textarea': BFormTextarea,
-    'my-section': Section
+    'my-section': Section,
+    'b-alert': BAlert
   },
   data() {
     return {
@@ -105,7 +122,10 @@ export default {
         price: '',
         file: null
       },
-      id: this.$route.params.id
+      id: this.$route.params.id,
+      dismissSecs: 5,
+      dismissSuccessCountDown: 0,
+      dismissFailCountDown: 0,
     }
   },
   methods: {
@@ -130,10 +150,11 @@ export default {
           }
         })
         .then(res => {
-          console.log(res.data);
+          this.showSuccessAlert();
         })
         .catch(e => {
-          console.log(e.response.data);
+          this.showFailAlert();
+          console.log(e);
         });
 
         return;
@@ -145,9 +166,10 @@ export default {
         }
       })
       .then(res => {
-        console.log(res.data);
+        this.showSuccessAlert();
       })
       .catch(e => {
+        this.showFailAlert();
         console.log(e);
       });
     },
@@ -159,6 +181,12 @@ export default {
       this.form.desc = '';
       this.form.price = '';
       this.$refs['file'].reset();
+    },
+    showSuccessAlert() {
+      this.dismissSuccessCountDown = this.dismissSecs
+    },
+    showFailAlert() {
+      this.dismissFailCountDown = this.dismissSecs
     }
   },
   created() {
