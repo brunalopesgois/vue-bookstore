@@ -11,6 +11,10 @@
         <img class="searchbox-img" src="/src/assets/search-icon.png">
       </div>
     </div>
+    <div v-if="serverError" class="error-occurred">
+      <p class="error-message text-center">Ops... ocorreu um erro.</p>
+      <img class="error-img d-flex justify-content-center" src="/src/assets/error.png" alt="">
+    </div>
     <section class="section">
       <ul class="book-list">
         <li class="book-list-item" v-for="book of filteredBooks" :key="book.id">
@@ -29,7 +33,8 @@ export default {
   data() {
     return {
       books: [],
-      filter: ''
+      filter: '',
+      serverError: false
     }
   },
   computed: {
@@ -50,6 +55,9 @@ export default {
             alert('Livro removido com sucesso');
             let index = this.books.indexOf(book);
             this.books.splice(index, 1);
+          })
+          .catch(e => {
+            console.log(e);
           });
     }
   },
@@ -58,7 +66,11 @@ export default {
     const axios = require('axios');
 
     axios.get('http://localhost:8000/api/books')
-      .then(res => this.books = res.data.data);
+      .then(res => this.books = res.data.data)
+      .catch(e => {
+        this.serverError = true;
+        console.log(e);
+      });
   },
   components: {
     'b-container': BContainer,
@@ -68,6 +80,16 @@ export default {
 </script>
 
 <style>
+.error-message {
+  color: dimgray;
+}
+.error-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
+  width: 300px;
+  height: 300px;
+}
 .top-section {
   display: flex;
 }
