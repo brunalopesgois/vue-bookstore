@@ -11,10 +11,17 @@
         <img class="searchbox-img" src="/src/assets/search-icon.png">
       </div>
     </div>
-    <div v-if="serverError" class="error-occurred">
+    <div v-if="indexError" class="error-occurred">
       <p class="error-message text-center">Ops... ocorreu um erro.</p>
       <img class="error-img d-flex justify-content-center" src="/src/assets/error.png" alt="">
     </div>
+    <b-alert
+      :show="dismissFailCountDown"
+      fade
+      variant="danger"
+    >
+      Ops... não foi possível remover o registro!
+    </b-alert>
     <section class="section">
       <ul class="book-list">
         <li class="book-list-item" v-for="book of filteredBooks" :key="book.id">
@@ -29,12 +36,15 @@
 import { BContainer } from 'bootstrap-vue';
 import Panel from '../shared/panel/Panel.vue';
 import axios from 'axios';
+import { BAlert } from 'bootstrap-vue';
 export default {
   data() {
     return {
       books: [],
       filter: '',
-      serverError: false
+      indexError: false,
+      dismissSecs: 5,
+      dismissFailCountDown: 0
     }
   },
   computed: {
@@ -57,8 +67,13 @@ export default {
             this.books.splice(index, 1);
           })
           .catch(e => {
+            this.serverError = 'delete';
+            this.showFailAlert();
             console.log(e);
           });
+    },
+    showFailAlert() {
+      this.dismissFailCountDown = this.dismissSecs
     }
   },
   created() {
@@ -68,7 +83,7 @@ export default {
     axios.get('http://localhost:8000/api/books')
       .then(res => this.books = res.data.data)
       .catch(e => {
-        this.serverError = true;
+        this.indexError = true;
         console.log(e);
       });
   },
