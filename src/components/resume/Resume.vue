@@ -17,7 +17,11 @@
                 <div class="formated-price">{{ this.book.price }}</div>
               </div>
             </h1>
-            <p>{{ this.book.desc }}</p>
+            <span v-if="!readMoreActivated">{{ this.book.desc.slice(0, 400) }}</span>
+            <a class="" v-if="(!readMoreActivated) && (this.book.desc.length > 400)" @click="activateReadMore" href="#">
+              Leia mais...
+            </a>
+            <span v-if="readMoreActivated">{{ this.book.desc }}</span>
         </b-col>
       </b-row>
       <b-row>
@@ -52,11 +56,14 @@ export default {
         desc: '',
         price: '',
         cover: null
-      }
+      },
+      readMoreActivated: false
     }
   },
   methods: {
-
+    activateReadMore(){
+        this.readMoreActivated = true;
+    }
   },
   created() {
     const axios = require('axios');
