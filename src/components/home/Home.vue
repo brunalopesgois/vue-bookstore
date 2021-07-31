@@ -17,10 +17,21 @@
     </div>
     <b-alert
       :show="dismissFailCountDown"
+      class="position-fixed fixed-top m-0 rounded-0"
+      style="z-index: 2000;"
       fade
       variant="danger"
     >
       Ops... não foi possível remover o registro!
+    </b-alert>
+    <b-alert
+      :show="dismissSuccessCountDown"
+      class="position-fixed fixed-top m-0 rounded-0"
+      style="z-index: 2000;"
+      fade
+      variant="success"
+    >
+      Livro removido com sucesso!
     </b-alert>
     <section class="section">
       <ul class="book-list">
@@ -44,6 +55,7 @@ export default {
       filter: '',
       indexError: false,
       dismissSecs: 5,
+      dismissSuccessCountDown: 0,
       dismissFailCountDown: 0
     }
   },
@@ -62,7 +74,7 @@ export default {
     remove(book) {
         axios.delete(`http://localhost:8000/api/books/${book.id}`)
           .then(res => {
-            alert('Livro removido com sucesso');
+            this.showSuccessAlert();
             let index = this.books.indexOf(book);
             this.books.splice(index, 1);
           })
@@ -71,6 +83,9 @@ export default {
             this.showFailAlert();
             console.log(e);
           });
+    },
+    showSuccessAlert() {
+      this.dismissSuccessCountDown = this.dismissSecs
     },
     showFailAlert() {
       this.dismissFailCountDown = this.dismissSecs
