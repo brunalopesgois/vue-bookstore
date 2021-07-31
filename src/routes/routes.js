@@ -1,5 +1,6 @@
 import Home from '../components/home/Home.vue';
 import Register from '../components/register/Register.vue';
+import Resume from '../components/resume/Resume.vue';
 
 export const routes = [
   {
@@ -16,5 +17,10 @@ export const routes = [
     path: '/register/:id',
     name: 'update',
     component: Register
+  },
+  {
+    path: '/resume/:id',
+    name: 'resume',
+    component: Resume
   },
 ];

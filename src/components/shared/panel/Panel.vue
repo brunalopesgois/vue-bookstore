@@ -16,7 +16,7 @@
       <h3>R$ {{ content.sale_price }}</h3>
       <p>{{ content.title }}</p>
       <div class="btn-alignment">
-        <b-button variant="warning">Saiba Mais</b-button>
+        <b-button variant="warning"  :to="{ name: 'resume', params: { id: content.id } }">Saiba Mais</b-button>
       </div>
     </div>
   </div>
