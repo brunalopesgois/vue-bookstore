@@ -1,9 +1,9 @@
 <template>
-  <header class="header">
-    <b-jumbotron class="d-flex justify-content-center" bg-variant="warning" text-variant="black">
-      <template #header>Livraria ABC</template>
-    </b-jumbotron>
-    <my-navbar></my-navbar>
+  <header>
+    <div class="header d-flex justify-content-center m-4">
+      <img src="/src/assets/logov2.png" alt="">
+    </div>
+    <my-navbar class="mb-4"></my-navbar>
   </header>
 </template>
 
@@ -19,7 +19,4 @@ export default {
 </script>
 
 <style>
-.header {
-  margin-bottom: 40px;
-}
 </style>
