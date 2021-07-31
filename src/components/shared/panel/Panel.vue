@@ -25,22 +25,43 @@
 <script>
 import { BButton } from 'bootstrap-vue';
 import { BButtonGroup } from 'bootstrap-vue';
+import { VBModal } from 'bootstrap-vue';
 export default {
   data() {
     return {
-
+      confirm: ''
     }
   },
   props: ['content'],
   components: {
     'b-button': BButton,
-    'b-button-group': BButtonGroup
+    'b-button-group': BButtonGroup,
+    'b-modal': VBModal
   },
   methods: {
     deleteBook(book) {
-      if (confirm(`Deseja realmente remover o livro ${book.title}?`)) {
-        this.$emit('remove', book);
-      }
+      this.showModal(book);
+    },
+    showModal(book) {
+      this.$bvModal.msgBoxConfirm(`Deseja realmente remover o livro ${book.title}?`, {
+        title: 'Atenção',
+        size: 'sm',
+        buttonSize: 'sm',
+        okVariant: 'danger',
+        okTitle: 'Sim',
+        cancelTitle: 'Não',
+        footerClass: 'p-2',
+        hideHeaderClose: false,
+        centered: true
+      })
+        .then(value => {
+          if (value) {
+            this.$emit('remove', book);
+          }
+        })
+        .catch(err => {
+          console.log(err);
+        })
     }
   }
 }
