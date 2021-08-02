@@ -16,78 +16,80 @@
       Ops... ocorreu um erro, tente novamente mais tarde!
     </b-alert>
     <my-section>
-      <b-form @submit="onSubmit" @reset="onReset">
-        <b-form-group
-          id="input-group-1"
-          label="Título:"
-          label-for="input-1"
-        >
-          <b-form-input
-            id="input-1"
-            v-model="form.title"
-            type="text"
-            placeholder="O livro mais legal do mundo..."
+      <div class="form-panel">
+        <b-form @submit="onSubmit" @reset="onReset">
+          <b-form-group
+            id="input-group-1"
+            label="Título:"
+            label-for="input-1"
+          >
+            <b-form-input
+              id="input-1"
+              v-model="form.title"
+              type="text"
+              placeholder="O livro mais legal do mundo..."
+              required
+            ></b-form-input>
+          </b-form-group>
+          <br>
+          <b-form-group
+            id="input-group-3"
+            label="Gênero:"
+            label-for="input-2"
+          >
+            <b-form-input
+              id="input-3"
+              v-model="form.genre"
+              type="text"
+              placeholder="Aventura..."
+              required
+            ></b-form-input>
+          </b-form-group>
+          <br>
+          <b-form-group
+            id="input-group-4"
+            label="Descrição:"
+            label-for="textarea-1"
+          >
+          <b-form-textarea
+            id="textarea-1"
+            v-model="form.desc"
+            placeholder="Era uma vez..."
+            rows="3"
+            max-rows="6"
             required
-          ></b-form-input>
-        </b-form-group>
-        <br>
-        <b-form-group
-          id="input-group-3"
-          label="Gênero:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-3"
-            v-model="form.genre"
-            type="text"
-            placeholder="Aventura..."
-            required
-          ></b-form-input>
-        </b-form-group>
-        <br>
-        <b-form-group
-          id="input-group-4"
-          label="Descrição:"
-          label-for="textarea-1"
-        >
-        <b-form-textarea
-          id="textarea-1"
-          v-model="form.desc"
-          placeholder="Era uma vez..."
-          rows="3"
-          max-rows="6"
-          required
-        ></b-form-textarea>
-        </b-form-group>
-        <br>
-        <b-form-group
-          id="input-group-2"
-          label="Preço de venda:"
-          label-for="input-2"
-        >
-          <b-form-input
-            id="input-2"
-            v-model="form.price"
-            type="number"
-            step="0.01"
-            min="0"
-            max="99"
-            placeholder="Apenas números..."
-            required
-          ></b-form-input>
-        </b-form-group>
-        <b-form-group
-          id="input-group-5"
-          label-for="file-1"
-        >
-          <div class="mt-3">Selecione um arquivo: {{ form.file ? form.file.name : '' }}</div>
-          <b-form-file id="file-1" ref="file" v-model="form.file" class="mt-3" plain></b-form-file>
-        </b-form-group>
-        <div class="form-btn">
-          <b-button type="submit" variant="primary">Cadastrar</b-button>
-          <b-button type="reset" variant="danger">Limpar</b-button>
-        </div>
-      </b-form>
+          ></b-form-textarea>
+          </b-form-group>
+          <br>
+          <b-form-group
+            id="input-group-2"
+            label="Preço de venda:"
+            label-for="input-2"
+          >
+            <b-form-input
+              id="input-2"
+              v-model="form.price"
+              type="number"
+              step="0.01"
+              min="0"
+              max="99"
+              placeholder="Apenas números..."
+              required
+            ></b-form-input>
+          </b-form-group>
+          <b-form-group
+            id="input-group-5"
+            label-for="file-1"
+          >
+            <div class="mt-3">Selecione um arquivo: {{ form.file ? form.file.name : '' }}</div>
+            <b-form-file id="file-1" ref="file" v-model="form.file" class="mt-3" plain></b-form-file>
+          </b-form-group>
+          <div class="form-btn">
+            <b-button type="submit" variant="primary">Cadastrar</b-button>
+            <b-button type="reset" variant="danger">Limpar</b-button>
+          </div>
+        </b-form>
+      </div>
     </my-section>
   </b-container>
 </template>
@@ -204,6 +206,11 @@ export default {
 </script>
 
 <style>
+.form-panel {
+  width: 80%;
+  margin-left: auto;
+  margin-right: auto;
+}
 .form-btn {
   margin-top: 20px;
 }
