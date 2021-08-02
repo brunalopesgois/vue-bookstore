@@ -22,6 +22,9 @@
               Leia mais...
             </a>
             <span v-if="readMoreActivated">{{ this.book.desc }}</span>
+            <a class="" v-if="readMoreActivated" @click="activateReadLess" href="#">
+              Leia menos...
+            </a>
         </b-col>
       </b-row>
       <b-row>
@@ -61,8 +64,13 @@ export default {
     }
   },
   methods: {
-    activateReadMore(){
+    activateReadMore(event){
+        event.preventDefault();
         this.readMoreActivated = true;
+    },
+    activateReadLess(event){
+      event.preventDefault();
+      this.readMoreActivated = false;
     }
   },
   created() {
