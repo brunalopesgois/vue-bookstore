@@ -1,75 +1,77 @@
 <template>
-  <b-container fluid>
-    <my-section>
-      <div v-if="!success" class="form-panel">
-        <b-form @submit="onSubmit" @reset="onReset">
-          <b-form-group
-            id="input-group-1"
-            label="Número do Cartão:"
-            label-for="input-1"
-          >
-            <b-form-input
-              id="input-1"
-              v-model="form.cardNumber"
-              type="text"
-              min="3"
-              required
-            ></b-form-input>
-          </b-form-group>
-          <br>
-          <b-form-group
-            id="input-group-2"
-            label="Nome no cartão:"
-            label-for="input-2"
-          >
-            <b-form-input
-              id="input-2"
-              v-model="form.ownerName"
-              type="text"
-              min="3"
-              required
-            ></b-form-input>
-          </b-form-group>
-          <br>
-          <div class="minor-field">
+  <div class="content">
+    <b-container fluid>
+      <my-section>
+        <div v-if="!success" class="form-panel">
+          <b-form @submit="onSubmit" @reset="onReset">
             <b-form-group
-              id="input-group-3"
-              label="Data de Validade:"
-              label-for="input-3"
+              id="input-group-1"
+              label="Número do Cartão:"
+              label-for="input-1"
             >
               <b-form-input
-                id="input-3"
-                v-model="form.date"
-                type="date"
+                id="input-1"
+                v-model="form.cardNumber"
+                type="text"
+                min="3"
                 required
               ></b-form-input>
             </b-form-group>
             <br>
             <b-form-group
-              id="input-group-4"
-              label="Código Segurança:"
-              label-for="input-4"
+              id="input-group-2"
+              label="Nome no cartão:"
+              label-for="input-2"
             >
               <b-form-input
-                id="input-4"
-                v-model="form.securityNumber"
-                type="number"
-                max="999"
+                id="input-2"
+                v-model="form.ownerName"
+                type="text"
+                min="3"
                 required
               ></b-form-input>
             </b-form-group>
-          </div>
-          <br>
-          <div class="form-btn">
-            <b-button type="submit" variant="success">Finalizar Compra</b-button>
-            <b-button type="reset" variant="danger">Limpar</b-button>
-          </div>
-        </b-form>
-      </div>
-        <img v-if="success" class="success-img" src="/src/assets/success.png" alt="">
-        <h2 v-if="success" class="d-flex justify-content-center">Compra efetuada! Verifique seu e-mail.</h2>
-    </my-section>
-  </b-container>
+            <br>
+            <div class="minor-field">
+              <b-form-group
+                id="input-group-3"
+                label="Data de Validade:"
+                label-for="input-3"
+              >
+                <b-form-input
+                  id="input-3"
+                  v-model="form.date"
+                  type="date"
+                  required
+                ></b-form-input>
+              </b-form-group>
+              <br>
+              <b-form-group
+                id="input-group-4"
+                label="Código Segurança:"
+                label-for="input-4"
+              >
+                <b-form-input
+                  id="input-4"
+                  v-model="form.securityNumber"
+                  type="number"
+                  max="999"
+                  required
+                ></b-form-input>
+              </b-form-group>
+            </div>
+            <br>
+            <div class="form-btn">
+              <b-button type="submit" variant="success">Finalizar Compra</b-button>
+              <b-button type="reset" variant="danger">Limpar</b-button>
+            </div>
+          </b-form>
+        </div>
+          <img v-if="success" class="success-img" src="/src/assets/success.png" alt="">
+          <h2 v-if="success" class="d-flex justify-content-center">Compra efetuada! Verifique seu e-mail.</h2>
+      </my-section>
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -134,6 +136,9 @@ export default {
 </script>
 
 <style>
+.content {
+  flex: 1 100vh;
+}
 .form-panel {
   width: 40%;
   margin-left: auto;

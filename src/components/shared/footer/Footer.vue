@@ -12,10 +12,9 @@ export default {
 
 <style>
   .footer {
-    position: absolute;
-    bottom: 0;
+    flex-shrink: 0;
     width:100%;
-    height: 5%;
+    height: 40px;
     background-color: #343a40;
   }
   .footer-msg {

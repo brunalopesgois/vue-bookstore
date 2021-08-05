@@ -1,49 +1,51 @@
 <template>
-  <b-container fluid>
-    <div class="top-section">
-      <div class="admin-register-btn">
-        <b-button variant="primary" :to="{ name: 'register' }">
-          + Novo Livro
-        </b-button>
+  <div class="content">
+    <b-container fluid>
+      <div class="top-section">
+        <div class="admin-register-btn">
+          <b-button variant="primary" :to="{ name: 'register' }">
+            + Novo Livro
+          </b-button>
+        </div>
+        <div class="searchbox d-flex justify-content-end">
+          <b-form-input type="search" v-model="filter" class="searchbox-input" placeholder="Buscar"></b-form-input>
+          <img class="searchbox-img" src="/src/assets/search-icon.png">
+        </div>
       </div>
-      <div class="searchbox d-flex justify-content-end">
-        <b-form-input type="search" v-model="filter" class="searchbox-input" placeholder="Buscar"></b-form-input>
-        <img class="searchbox-img" src="/src/assets/search-icon.png">
+      <div v-if="indexError" class="error-occurred">
+        <p class="error-message text-center">Ops... ocorreu um erro.</p>
+        <img class="error-img d-flex justify-content-center" src="/src/assets/error.png" alt="">
       </div>
-    </div>
-    <div v-if="indexError" class="error-occurred">
-      <p class="error-message text-center">Ops... ocorreu um erro.</p>
-      <img class="error-img d-flex justify-content-center" src="/src/assets/error.png" alt="">
-    </div>
-    <b-alert
-      :show="dismissFailCountDown"
-      class="position-fixed fixed-top m-0 rounded-0"
-      style="z-index: 2000;"
-      fade
-      variant="danger"
-    >
-      Ops... não foi possível remover o registro!
-    </b-alert>
-    <b-alert
-      :show="dismissSuccessCountDown"
-      class="position-fixed fixed-top m-0 rounded-0"
-      style="z-index: 2000;"
-      fade
-      variant="success"
-    >
-      Livro removido com sucesso!
-    </b-alert>
-    <section class="section">
-      <ul class="book-list">
-        <li class="book-list-item" v-for="book of filteredBooks" :key="book.id">
-          <my-panel @remove="remove" :content="book"></my-panel>
-        </li>
-      </ul>
-    </section>
-    <div class="mt-3">
-      <b-pagination v-model="currentPage" pills :total-rows="rows" :per-page="perPage" align="right"></b-pagination>
-    </div>
-  </b-container>
+      <b-alert
+        :show="dismissFailCountDown"
+        class="position-fixed fixed-top m-0 rounded-0"
+        style="z-index: 2000;"
+        fade
+        variant="danger"
+      >
+        Ops... não foi possível remover o registro!
+      </b-alert>
+      <b-alert
+        :show="dismissSuccessCountDown"
+        class="position-fixed fixed-top m-0 rounded-0"
+        style="z-index: 2000;"
+        fade
+        variant="success"
+      >
+        Livro removido com sucesso!
+      </b-alert>
+      <section class="section">
+        <ul class="book-list">
+          <li class="book-list-item" v-for="book of filteredBooks" :key="book.id">
+            <my-panel @remove="remove" :content="book"></my-panel>
+          </li>
+        </ul>
+      </section>
+      <div class="mt-3">
+        <b-pagination v-model="currentPage" pills :total-rows="rows" :per-page="perPage" align="right"></b-pagination>
+      </div>
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -133,6 +135,9 @@ export default {
 </script>
 
 <style>
+.content {
+  flex: 1 100vh;
+}
 .error-message {
   color: dimgray;
 }

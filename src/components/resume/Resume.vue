@@ -1,39 +1,41 @@
 <template>
-  <b-container fluid>
-    <my-section>
-      <b-row>
-        <b-col>
-          <div class="img-panel">
-            <img class="img" v-if="this.book.cover" :src="'http://localhost:8000/'+this.book.cover">
-            <img class="img" v-else src="/src/assets/no-image.png">
-          </div>
-        </b-col>
-        <b-col>
-            <h2>{{ this.book.title }}</h2>
-            <h3 class="genre">{{ this.book.genre }}</h3>
-            <h1 class="price">
-              <div class="flex-price d-flex justify-content-start">
-                R$
-                <div class="formated-price">{{ this.book.price }}</div>
-              </div>
-            </h1>
-            <span v-if="!readMoreActivated">{{ this.book.desc.slice(0, 400) }}</span>
-            <a class="" v-if="(!readMoreActivated) && (this.book.desc.length > 400)" @click="activateReadMore" href="#">
-              Leia mais...
-            </a>
-            <span v-if="readMoreActivated">{{ this.book.desc }}</span>
-            <a class="" v-if="readMoreActivated" @click="activateReadLess" href="#">
-              Leia menos...
-            </a>
-        </b-col>
-      </b-row>
-      <b-row>
-        <b-col class="d-flex justify-content-end">
-          <b-button variant="warning" size="lg" :to="{ name: 'checkout', params: { id: this.id } }">Comprar</b-button>
-        </b-col>
-      </b-row>
-    </my-section>
-  </b-container>
+  <div class="content">
+    <b-container fluid>
+      <my-section>
+        <b-row>
+          <b-col>
+            <div class="img-panel">
+              <img class="img" v-if="this.book.cover" :src="'http://localhost:8000/'+this.book.cover">
+              <img class="img" v-else src="/src/assets/no-image.png">
+            </div>
+          </b-col>
+          <b-col>
+              <h2>{{ this.book.title }}</h2>
+              <h3 class="genre">{{ this.book.genre }}</h3>
+              <h1 class="price">
+                <div class="flex-price d-flex justify-content-start">
+                  R$
+                  <div class="formated-price">{{ this.book.price }}</div>
+                </div>
+              </h1>
+              <span v-if="!readMoreActivated">{{ this.book.desc.slice(0, 400) }}</span>
+              <a class="" v-if="(!readMoreActivated) && (this.book.desc.length > 400)" @click="activateReadMore" href="#">
+                Leia mais...
+              </a>
+              <span v-if="readMoreActivated">{{ this.book.desc }}</span>
+              <a class="" v-if="readMoreActivated" @click="activateReadLess" href="#">
+                Leia menos...
+              </a>
+          </b-col>
+        </b-row>
+        <b-row>
+          <b-col class="d-flex justify-content-end">
+            <b-button variant="warning" size="lg" :to="{ name: 'checkout', params: { id: this.id } }">Comprar</b-button>
+          </b-col>
+        </b-row>
+      </my-section>
+    </b-container>
+  </div>
 </template>
 
 <script>
@@ -92,6 +94,9 @@ export default {
 </script>
 
 <style>
+.content {
+  flex: 1 100vh;
+}
   .img-panel {
     width: 350px;
     height: 500px;
