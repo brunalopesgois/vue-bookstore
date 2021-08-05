@@ -1,21 +1,7 @@
 <template>
   <b-container fluid>
-    <b-alert
-      :show="dismissSuccessCountDown"
-      fade
-      variant="success"
-    >
-      Compra efetuada! Verifique seu e-mail.
-    </b-alert>
-    <b-alert
-      :show="dismissFailCountDown"
-      fade
-      variant="danger"
-    >
-      Ops... ocorreu um erro, tente novamente mais tarde!
-    </b-alert>
     <my-section>
-      <div class="form-panel">
+      <div v-if="!success" class="form-panel">
         <b-form @submit="onSubmit" @reset="onReset">
           <b-form-group
             id="input-group-1"
@@ -80,6 +66,8 @@
           </div>
         </b-form>
       </div>
+        <img v-if="success" class="success-img" src="/src/assets/success.png" alt="">
+        <h2 v-if="success" class="d-flex justify-content-center">Compra efetuada! Verifique seu e-mail.</h2>
     </my-section>
   </b-container>
 </template>
@@ -114,9 +102,7 @@ export default {
         securityNumber: ''
       },
       id: this.$route.params.id,
-      dismissSecs: 5,
-      dismissSuccessCountDown: 0,
-      dismissFailCountDown: 0,
+      success: false
     }
   },
   methods: {
@@ -129,10 +115,9 @@ export default {
         cvv: this.form.securityNumber
       })
       .then(res => {
-        this.showSuccessAlert();
+        this.success = true;
       })
       .catch(e => {
-        this.showFailAlert();
         console.log(e);
       });
     },
@@ -143,12 +128,6 @@ export default {
       this.form.ownerName = '';
       this.form.date = '';
       this.form.securityNumber = '';
-    },
-    showSuccessAlert() {
-      this.dismissSuccessCountDown = this.dismissSecs
-    },
-    showFailAlert() {
-      this.dismissFailCountDown = this.dismissSecs
     }
   }
 }
@@ -165,5 +144,10 @@ export default {
 }
 .minor-field {
   width: 50%;
+}
+.success-img {
+  display: block;
+  margin-left: auto;
+  margin-right: auto;
 }
 </style>
