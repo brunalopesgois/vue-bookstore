@@ -29,7 +29,7 @@
       </b-row>
       <b-row>
         <b-col class="d-flex justify-content-end">
-          <b-button variant="warning" size="lg">Comprar</b-button>
+          <b-button variant="warning" size="lg" :to="{ name: 'checkout', params: { id: this.id } }">Comprar</b-button>
         </b-col>
       </b-row>
     </my-section>

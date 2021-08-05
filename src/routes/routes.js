@@ -1,6 +1,7 @@
 import Home from '../components/home/Home.vue';
 import Register from '../components/register/Register.vue';
 import Resume from '../components/resume/Resume.vue';
+import Checkout from '../components/checkout/Checkout.vue';
 
 export const routes = [
   {
@@ -22,5 +23,10 @@ export const routes = [
     path: '/resume/:id',
     name: 'resume',
     component: Resume
+  },
+  {
+    path: '/checkout/:id',
+    name: 'checkout',
+    component: Checkout
   },
 ];
