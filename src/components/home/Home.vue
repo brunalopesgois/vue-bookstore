@@ -173,4 +173,11 @@ export default {
 .book-list .book-list-item {
   display: inline-block;
 }
+.page-item.active .page-link {
+    background-color: #faad14 !important;
+    border-color: #faad14 !important;
+}
+.page-item .page-link {
+    color: black !important;
+}
 </style>
