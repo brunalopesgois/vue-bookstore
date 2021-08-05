@@ -40,6 +40,9 @@
         </li>
       </ul>
     </section>
+    <div class="mt-3">
+      <b-pagination v-model="currentPage" pills :total-rows="rows" :per-page="perPage" align="right"></b-pagination>
+    </div>
   </b-container>
 </template>
 
@@ -47,7 +50,7 @@
 import { BContainer } from 'bootstrap-vue';
 import Panel from '../shared/panel/Panel.vue';
 import axios from 'axios';
-import { BAlert } from 'bootstrap-vue';
+import { BPagination } from 'bootstrap-vue';
 export default {
   data() {
     return {
@@ -56,8 +59,16 @@ export default {
       indexError: false,
       dismissSecs: 5,
       dismissSuccessCountDown: 0,
-      dismissFailCountDown: 0
+      dismissFailCountDown: 0,
+      currentPage: 1,
+      rows: 0,
+      perPage: 0
     }
+  },
+  components: {
+    'b-container': BContainer,
+    'my-panel': Panel,
+    'b-pagination': BPagination
   },
   computed: {
     filteredBooks() {
@@ -95,16 +106,28 @@ export default {
 
     const axios = require('axios');
 
-    axios.get('http://localhost:8000/api/books')
-      .then(res => this.books = res.data.data)
+    axios.get(`http://localhost:8000/api/books?page=${this.currentPage}`)
+      .then(res => {
+        this.books = res.data.data;
+        this.rows = res.data.last_page + 2;
+        this.perPage = res.data.per_page;
+      })
       .catch(e => {
         this.indexError = true;
         console.log(e);
       });
   },
-  components: {
-    'b-container': BContainer,
-    'my-panel': Panel
+  watch: {
+    currentPage: {
+      handler: function(value) {
+        axios.get(`http://localhost:8000/api/books?page=${this.currentPage}`)
+          .then(res => this.books = res.data.data)
+          .catch(e => {
+            this.indexError = true;
+            console.log(e);
+          });
+      }
+    }
   }
 }
 </script>
