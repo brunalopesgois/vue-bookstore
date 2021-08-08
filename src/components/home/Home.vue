@@ -111,7 +111,7 @@ export default {
     axios.get(`http://localhost:8000/api/books?page=${this.currentPage}`)
       .then(res => {
         this.books = res.data.data;
-        this.rows = res.data.last_page + 2;
+        this.rows = res.data.last_page * 11;
         this.perPage = res.data.per_page;
       })
       .catch(e => {
@@ -123,7 +123,11 @@ export default {
     currentPage: {
       handler: function(value) {
         axios.get(`http://localhost:8000/api/books?page=${this.currentPage}`)
-          .then(res => this.books = res.data.data)
+          .then(res => {
+            this.books = res.data.data
+            this.rows = res.data.last_page * 11;
+            this.perPage = res.data.per_page;
+          })
           .catch(e => {
             this.indexError = true;
             console.log(e);
