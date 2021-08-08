@@ -8,7 +8,7 @@
           </b-button>
         </div>
         <div class="searchbox d-flex justify-content-end">
-          <b-form-input type="search" v-model="filter" class="searchbox-input" placeholder="Buscar"></b-form-input>
+          <b-form-input type="search" v-model="filter" class="searchbox-input" placeholder="Buscar" @input="handleFilter()"></b-form-input>
           <img class="searchbox-img" src="/src/assets/search-icon.png">
         </div>
       </div>
@@ -36,7 +36,7 @@
       </b-alert>
       <section class="section">
         <ul class="book-list">
-          <li class="book-list-item" v-for="book of filteredBooks" :key="book.id">
+          <li class="book-list-item" v-for="book of books" :key="book.id">
             <my-panel @remove="remove" :content="book"></my-panel>
           </li>
         </ul>
@@ -64,24 +64,14 @@ export default {
       dismissFailCountDown: 0,
       currentPage: 1,
       rows: 0,
-      perPage: 0
+      perPage: 0,
+      debounce: null
     }
   },
   components: {
     'b-container': BContainer,
     'my-panel': Panel,
     'b-pagination': BPagination
-  },
-  computed: {
-    filteredBooks() {
-      if (this.filter) {
-        return this.books.filter((book) => {
-          return book.title.match(new RegExp(this.filter, "i"));
-        });
-      };
-
-      return this.books;
-    }
   },
   methods: {
     remove(book) {
@@ -102,22 +92,36 @@ export default {
     },
     showFailAlert() {
       this.dismissFailCountDown = this.dismissSecs
+    },
+    index() {
+      axios.get(`http://localhost:8000/api/books?page=${this.currentPage}`)
+        .then(res => {
+          this.books = res.data.data;
+          this.rows = res.data.last_page * 11;
+          this.perPage = res.data.per_page;
+        })
+        .catch(e => {
+          this.indexError = true;
+          console.log(e);
+        });
+    },
+    handleFilter() {
+      if (!this.filter) {
+        this.index();
+        return false;
+      }
+      clearTimeout(this.debounce);
+      this.debounce = setTimeout(() => {
+        axios.get('http://localhost:8000/api/books/', { params: { search: this.filter } })
+          .then(res => {
+            this.books = res.data;
+          });
+      }, 500);
     }
   },
   created() {
-
     const axios = require('axios');
-
-    axios.get(`http://localhost:8000/api/books?page=${this.currentPage}`)
-      .then(res => {
-        this.books = res.data.data;
-        this.rows = res.data.last_page * 11;
-        this.perPage = res.data.per_page;
-      })
-      .catch(e => {
-        this.indexError = true;
-        console.log(e);
-      });
+    this.index();
   },
   watch: {
     currentPage: {
