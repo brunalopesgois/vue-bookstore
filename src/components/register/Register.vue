@@ -150,6 +150,7 @@ export default {
         formData.append('_method', 'PUT');
         axios.post(`http://localhost:8000/api/books/${this.id}`, formData, {
           headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token'),
             'Content-Type': 'multipart/form-data'
           }
         })
@@ -166,6 +167,7 @@ export default {
 
       axios.post('http://localhost:8000/api/books', formData, {
         headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token'),
           'Content-Type': 'multipart/form-data'
         }
       })

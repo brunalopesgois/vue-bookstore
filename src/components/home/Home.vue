@@ -75,7 +75,11 @@ export default {
   },
   methods: {
     remove(book) {
-        axios.delete(`http://localhost:8000/api/books/${book.id}`)
+        axios.delete(`http://localhost:8000/api/books/${book.id}`, {
+          headers: {
+            'Authorization': 'Bearer ' + localStorage.getItem('token')
+          }
+        })
           .then(res => {
             this.showSuccessAlert();
             let index = this.books.indexOf(book);

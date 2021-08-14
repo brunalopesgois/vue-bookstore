@@ -5,10 +5,12 @@ import 'bootstrap/dist/css/bootstrap.css';
 import 'bootstrap-vue/dist/bootstrap-vue.css';
 import VueRouter from 'vue-router';
 import { routes } from './routes/routes';
+import Vuex from 'vuex';
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueRouter);
+Vue.use(Vuex);
 
 const router = new VueRouter({
   routes: routes,

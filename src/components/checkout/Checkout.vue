@@ -111,6 +111,11 @@ export default {
     onSubmit(event) {
       event.preventDefault();
       axios.post(`http://localhost:8000/api/checkout/books/${this.id}`, {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      },
+      {
         card_number: this.form.cardNumber,
         owner_name: this.form.ownerName,
         expiration_date: this.form.date,
