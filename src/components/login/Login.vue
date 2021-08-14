@@ -85,6 +85,22 @@ export default {
       .then(res => {
         localStorage.setItem('token', res.data.generated_token);
         this.$router.back();
+        this.storeUser();
+      })
+      .catch(e => {
+        console.log(e);
+      });
+    },
+    storeUser() {
+      axios.get('http://localhost:8000/api/user', {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
+      })
+      .then(res => {
+        localStorage.setItem('userName', res.data.name);
+        localStorage.setItem('userProfile', res.data.email);
+        location.reload();
       })
       .catch(e => {
         console.log(e);

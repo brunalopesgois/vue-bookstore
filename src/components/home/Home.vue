@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <my-user :name="user.name" :profile="user.profile"></my-user>
     <b-container fluid>
       <div class="top-section">
         <div class="admin-register-btn">
@@ -53,6 +54,7 @@ import { BContainer } from 'bootstrap-vue';
 import Panel from '../shared/panel/Panel.vue';
 import axios from 'axios';
 import { BPagination } from 'bootstrap-vue';
+import UserInfo from '../shared/user-info/UserInfo.vue';
 export default {
   data() {
     return {
@@ -65,13 +67,18 @@ export default {
       currentPage: 1,
       rows: 0,
       perPage: 0,
-      debounce: null
+      debounce: null,
+      user: {
+        name: localStorage.getItem('userName') ? localStorage.getItem('userName') : '',
+        profile: localStorage.getItem('userProfile') ? localStorage.getItem('userProfile') : ''
+      }
     }
   },
   components: {
     'b-container': BContainer,
     'my-panel': Panel,
-    'b-pagination': BPagination
+    'b-pagination': BPagination,
+    'my-user': UserInfo
   },
   methods: {
     remove(book) {
