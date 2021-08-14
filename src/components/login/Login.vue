@@ -84,7 +84,7 @@ export default {
       })
       .then(res => {
         localStorage.setItem('token', res.data.generated_token);
-        this.$router.push({ name: 'home' });
+        this.$router.back();
       })
       .catch(e => {
         console.log(e);
