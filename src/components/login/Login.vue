@@ -98,8 +98,10 @@ export default {
         }
       })
       .then(res => {
+        let profile = res.data.profile.charAt(0).toUpperCase() + res.data.profile.slice(1);
+
         localStorage.setItem('userName', res.data.name);
-        localStorage.setItem('userProfile', res.data.email);
+        localStorage.setItem('userProfile', profile);
         location.reload();
       })
       .catch(e => {
