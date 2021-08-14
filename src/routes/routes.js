@@ -8,7 +8,10 @@ export const routes = [
   {
     path: '',
     name: 'home',
-    component: Home
+    component: Home,
+    meta: {
+      public: true
+    }
   },
   {
     path: '/register',
@@ -23,7 +26,10 @@ export const routes = [
   {
     path: '/resume/:id',
     name: 'resume',
-    component: Resume
+    component: Resume,
+    meta: {
+      public: true
+    }
   },
   {
     path: '/checkout/:id',
@@ -33,6 +39,9 @@ export const routes = [
   {
     path: '/login',
     name: 'login',
-    component: Login
+    component: Login,
+    meta: {
+      public: true
+    }
   },
 ];

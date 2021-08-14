@@ -17,6 +17,13 @@ const router = new VueRouter({
   mode: 'history'
 });
 
+router.beforeEach((to, from, next) => {
+  if (!to.meta.public && !localStorage.getItem('token')) {
+    return next({ path: '/login' });
+  }
+  next();
+});
+
 new Vue({
   el: '#app',
   router: router,
