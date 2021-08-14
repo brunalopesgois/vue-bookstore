@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <my-user :name="user.name" :profile="user.profile"></my-user>
     <b-container fluid>
       <my-section>
         <b-row>
@@ -44,13 +45,15 @@ import { BRow } from 'bootstrap-vue';
 import { BCol } from 'bootstrap-vue';
 import { BButton } from 'bootstrap-vue'
 import Section from '../shared/section/Section.vue';
+import UserInfo from '../shared/user-info/UserInfo.vue';
 export default {
   components: {
     'b-container': BContainer,
     'b-row': BRow,
     'b-col': BCol,
     'b-button': BButton,
-    'my-section': Section
+    'my-section': Section,
+    'my-user': UserInfo
   },
   data() {
     return {
@@ -62,7 +65,11 @@ export default {
         price: '',
         cover: null
       },
-      readMoreActivated: false
+      readMoreActivated: false,
+      user: {
+        name: localStorage.getItem('userName') ? localStorage.getItem('userName') : '',
+        profile: localStorage.getItem('userProfile') ? localStorage.getItem('userProfile') : ''
+      }
     }
   },
   methods: {

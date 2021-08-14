@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <my-user :name="user.name" :profile="user.profile"></my-user>
     <b-container fluid>
       <my-section>
         <div v-if="!success" class="form-panel">
@@ -84,6 +85,7 @@ import { BFormTextarea } from 'bootstrap-vue';
 import axios from 'axios';
 import Section from '../shared/section/Section.vue';
 import { BAlert } from 'bootstrap-vue';
+import UserInfo from '../shared/user-info/UserInfo.vue';
 export default {
   components: {
     'b-container': BContainer,
@@ -93,7 +95,8 @@ export default {
     'b-form-file': BFormFile,
     'b-form-textarea': BFormTextarea,
     'my-section': Section,
-    'b-alert': BAlert
+    'b-alert': BAlert,
+    'my-user': UserInfo
   },
   data() {
     return {
@@ -104,7 +107,11 @@ export default {
         securityNumber: ''
       },
       id: this.$route.params.id,
-      success: false
+      success: false,
+      user: {
+        name: localStorage.getItem('userName') ? localStorage.getItem('userName') : '',
+        profile: localStorage.getItem('userProfile') ? localStorage.getItem('userProfile') : ''
+      }
     }
   },
   methods: {

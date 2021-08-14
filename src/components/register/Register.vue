@@ -1,5 +1,6 @@
 <template>
   <div class="content">
+    <my-user :name="user.name" :profile="user.profile"></my-user>
     <b-container fluid>
       <b-alert
         :show="dismissSuccessCountDown"
@@ -106,6 +107,7 @@ import { BFormTextarea } from 'bootstrap-vue';
 import axios from 'axios';
 import Section from '../shared/section/Section.vue';
 import { BAlert } from 'bootstrap-vue';
+import UserInfo from '../shared/user-info/UserInfo.vue';
 export default {
   components: {
     'b-container': BContainer,
@@ -115,7 +117,8 @@ export default {
     'b-form-file': BFormFile,
     'b-form-textarea': BFormTextarea,
     'my-section': Section,
-    'b-alert': BAlert
+    'b-alert': BAlert,
+    'my-user': UserInfo
   },
   data() {
     return {
@@ -130,6 +133,10 @@ export default {
       dismissSecs: 5,
       dismissSuccessCountDown: 0,
       dismissFailCountDown: 0,
+      user: {
+        name: localStorage.getItem('userName') ? localStorage.getItem('userName') : '',
+        profile: localStorage.getItem('userProfile') ? localStorage.getItem('userProfile') : ''
+      }
     }
   },
   methods: {
