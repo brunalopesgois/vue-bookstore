@@ -110,16 +110,17 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      axios.post(`http://localhost:8000/api/checkout/books/${this.id}`, {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-      },
+      axios.post(`http://localhost:8000/api/checkout/books/${this.id}`,
       {
         card_number: this.form.cardNumber,
         owner_name: this.form.ownerName,
         expiration_date: this.form.date,
         cvv: this.form.securityNumber
+      },
+      {
+        headers: {
+          'Authorization': 'Bearer ' + localStorage.getItem('token')
+        }
       })
       .then(res => {
         this.success = true;
