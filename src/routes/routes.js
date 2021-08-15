@@ -3,6 +3,7 @@ import Register from '../components/register/Register.vue';
 import Resume from '../components/resume/Resume.vue';
 import Checkout from '../components/checkout/Checkout.vue';
 import Login from '../components/login/Login.vue';
+import NotAuthorized from '../components/not-authorized/NotAuthorized.vue';
 
 export const routes = [
   {
@@ -16,12 +17,18 @@ export const routes = [
   {
     path: '/register',
     name: 'register',
-    component: Register
+    component: Register,
+    meta: {
+      admin: true
+    }
   },
   {
     path: '/register/:id',
     name: 'update',
-    component: Register
+    component: Register,
+    meta: {
+      admin: true
+    }
   },
   {
     path: '/resume/:id',
@@ -40,6 +47,14 @@ export const routes = [
     path: '/login',
     name: 'login',
     component: Login,
+    meta: {
+      public: true
+    }
+  },
+  {
+    path: '/not-authorized',
+    name: 'forbidden',
+    component: NotAuthorized,
     meta: {
       public: true
     }

@@ -21,6 +21,10 @@ router.beforeEach((to, from, next) => {
   if (!to.meta.public && !localStorage.getItem('token')) {
     return next({ path: '/login' });
   }
+
+  if (to.meta.admin && (localStorage.getItem('userProfile') != 'Admin')) {
+    return next({ path: '/not-authorized'});
+  }
   next();
 });
 
