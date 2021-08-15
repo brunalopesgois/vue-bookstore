@@ -1,6 +1,8 @@
-# vue-bookstore
+# Vue Bookstore
 
-> A Vue.js project
+> Projeto de aplicação web simulando uma livraria, consome a api 'Laravel Bookstore API', disponível no meu github.
+
+### Importante: subir servidor da API na porta 8000.
 
 ## Build Setup
 
