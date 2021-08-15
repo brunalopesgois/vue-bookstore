@@ -82,7 +82,7 @@ export default {
   },
   methods: {
     remove(book) {
-        axios.delete(`http://localhost:8000/api/books/${book.id}`, {
+        axios.delete(`/api/books/${book.id}`, {
           headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token')
           }
@@ -105,7 +105,7 @@ export default {
       this.dismissFailCountDown = this.dismissSecs
     },
     index() {
-      axios.get(`http://localhost:8000/api/books?page=${this.currentPage}`)
+      axios.get(`/api/books?page=${this.currentPage}`)
         .then(res => {
           this.books = res.data.data;
           this.rows = res.data.last_page * 11;
@@ -123,7 +123,7 @@ export default {
       }
       clearTimeout(this.debounce);
       this.debounce = setTimeout(() => {
-        axios.get('http://localhost:8000/api/books/', { params: { search: this.filter } })
+        axios.get('/api/books/', { params: { search: this.filter } })
           .then(res => {
             this.books = res.data;
           });
@@ -137,7 +137,7 @@ export default {
   watch: {
     currentPage: {
       handler: function(value) {
-        axios.get(`http://localhost:8000/api/books?page=${this.currentPage}`)
+        axios.get(`/api/books?page=${this.currentPage}`)
           .then(res => {
             this.books = res.data.data
             this.rows = res.data.last_page * 11;

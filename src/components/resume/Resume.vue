@@ -6,7 +6,7 @@
         <b-row>
           <b-col>
             <div class="img-panel">
-              <img class="img" v-if="this.book.cover" :src="'http://localhost:8000/'+this.book.cover">
+              <img class="img" v-if="this.book.cover" :src="this.storageUrl+this.book.cover">
               <img class="img" v-else src="/src/assets/no-image.png">
             </div>
           </b-col>
@@ -69,7 +69,8 @@ export default {
       user: {
         name: localStorage.getItem('userName') ? localStorage.getItem('userName') : '',
         profile: localStorage.getItem('userProfile') ? localStorage.getItem('userProfile') : ''
-      }
+      },
+      storageUrl: process.env.API_URL + '/'
     }
   },
   methods: {
@@ -85,7 +86,7 @@ export default {
   created() {
     const axios = require('axios');
 
-    axios.get(`http://localhost:8000/api/books/${this.id}`)
+    axios.get(`/api/books/${this.id}`)
       .then(res => {
         this.book.title = res.data.title,
         this.book.genre = res.data.genre,

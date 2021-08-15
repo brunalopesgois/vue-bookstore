@@ -6,6 +6,9 @@ import 'bootstrap-vue/dist/bootstrap-vue.css';
 import VueRouter from 'vue-router';
 import { routes } from './routes/routes';
 import Vuex from 'vuex';
+import axios from 'axios';
+
+axios.defaults.baseURL = process.env.API_URL;
 
 Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);

@@ -78,7 +78,7 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      axios.post('http://localhost:8000/api/login', {
+      axios.post('/api/login', {
         email: this.form.email,
         password: this.form.password
       })
@@ -92,7 +92,7 @@ export default {
       });
     },
     storeUser() {
-      axios.get('http://localhost:8000/api/user', {
+      axios.get('/api/user', {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem('token')
         }

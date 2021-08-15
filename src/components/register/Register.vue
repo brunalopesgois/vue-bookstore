@@ -155,7 +155,7 @@ export default {
       let response = '';
       if (id) {
         formData.append('_method', 'PUT');
-        axios.post(`http://localhost:8000/api/books/${this.id}`, formData, {
+        axios.post(`/api/books/${this.id}`, formData, {
           headers: {
             'Authorization': 'Bearer ' + localStorage.getItem('token'),
             'Content-Type': 'multipart/form-data'
@@ -172,7 +172,7 @@ export default {
         return;
       }
 
-      axios.post('http://localhost:8000/api/books', formData, {
+      axios.post('/api/books', formData, {
         headers: {
           'Authorization': 'Bearer ' + localStorage.getItem('token'),
           'Content-Type': 'multipart/form-data'
@@ -204,7 +204,7 @@ export default {
   },
   created() {
     if (this.id) {
-      axios.get(`http://localhost:8000/api/books/${this.id}`)
+      axios.get(`/api/books/${this.id}`)
       .then(res => {
         this.form.title = res.data.title,
         this.form.genre = res.data.genre,

@@ -11,7 +11,7 @@
       </b-button-group>
     </div>
     <div class="panel-content">
-      <img class="img" v-if="content.cover" :src="'http://localhost:8000/'+content.cover">
+      <img class="img" v-if="content.cover" :src="this.storageUrl+content.cover">
       <img class="img" v-else src="/src/assets/no-image.png">
       <h3>R$ {{ content.sale_price }}</h3>
       <p>{{ content.title }}</p>
@@ -30,7 +30,8 @@ export default {
   data() {
     return {
       confirm: '',
-      userProfile: localStorage.getItem('userProfile') ? localStorage.getItem('userProfile') : ''
+      userProfile: localStorage.getItem('userProfile') ? localStorage.getItem('userProfile') : '',
+      storageUrl: process.env.API_URL + '/'
     }
   },
   props: ['content'],

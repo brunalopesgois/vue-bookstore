@@ -117,7 +117,7 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      axios.post(`http://localhost:8000/api/checkout/books/${this.id}`,
+      axios.post(`/api/checkout/books/${this.id}`,
       {
         card_number: this.form.cardNumber,
         owner_name: this.form.ownerName,
