@@ -1,6 +1,6 @@
 <template>
   <div class="panel">
-    <div class="panel-admin-buttons">
+    <div v-if="userProfile == 'Admin'" class="panel-admin-buttons">
       <b-button-group size="sm">
         <b-button variant="info" :to="{ name: 'update', params: { id: content.id } }">
           <img src="/src/assets/edit-icon.png">
@@ -29,7 +29,8 @@ import { VBModal } from 'bootstrap-vue';
 export default {
   data() {
     return {
-      confirm: ''
+      confirm: '',
+      userProfile: localStorage.getItem('userProfile') ? localStorage.getItem('userProfile') : ''
     }
   },
   props: ['content'],

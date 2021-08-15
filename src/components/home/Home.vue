@@ -3,7 +3,7 @@
     <my-user :name="user.name" :profile="user.profile"></my-user>
     <b-container fluid>
       <div class="top-section">
-        <div class="admin-register-btn">
+        <div v-if="user.profile == 'Admin'" class="admin-register-btn">
           <b-button variant="primary" :to="{ name: 'register' }">
             + Novo Livro
           </b-button>
