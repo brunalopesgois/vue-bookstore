@@ -7,6 +7,7 @@ import VueRouter from 'vue-router';
 import { routes } from './routes/index';
 import Vuex from 'vuex';
 import axios from 'axios';
+import Toasted from 'vue-toasted';
 
 axios.defaults.baseURL = process.env.API_URL;
 
@@ -14,6 +15,9 @@ Vue.use(BootstrapVue);
 Vue.use(IconsPlugin);
 Vue.use(VueRouter);
 Vue.use(Vuex);
+Vue.use(Toasted, {
+  iconPack: 'custom-class'
+});
 
 const router = new VueRouter({
   routes: routes,

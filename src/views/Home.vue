@@ -17,7 +17,6 @@
         <p class="error-message text-center">Ops... ocorreu um erro.</p>
         <img class="error-img d-flex justify-content-center" src="/src/assets/error.png" alt="">
       </div>
-      <my-alert :show="show" :variant="variant">{{ message }}</my-alert>
       <section class="section">
         <ul class="book-list">
           <li class="book-list-item" v-for="book of books" :key="book.id">
@@ -38,7 +37,6 @@ import Panel from '../components/Panel.vue';
 import { BPagination } from 'bootstrap-vue';
 import UserInfo from '../components/UserInfo.vue';
 import BookService from '../services/book/BookService';
-import Alert from '../components/Alert.vue';
 export default {
   data() {
     return {
@@ -62,32 +60,21 @@ export default {
     'b-container': BContainer,
     'my-panel': Panel,
     'b-pagination': BPagination,
-    'my-user': UserInfo,
-    'my-alert': Alert
+    'my-user': UserInfo
   },
   methods: {
     remove(book) {
-        this.service.delete(book.id)
-          .then(res => {
-            this.showSuccessAlert();
-            let index = this.books.indexOf(book);
-            this.books.splice(index, 1);
-          })
-          .catch(e => {
-            this.serverError = 'delete';
-            this.showFailAlert();
-            console.log(e);
-          });
-    },
-    showSuccessAlert() {
-      this.variant = "success",
-      this.message = "Livro inserido com sucesso!"
-      this.show = 3;
-    },
-    showFailAlert() {
-      this.variant = "danger",
-      this.message = "Ops... Ocorreu um erro!"
-      this.show = 3;
+      this.service.delete(book.id)
+        .then(res => {
+          this.$toasted.success("Livro excluído com sucesso!").goAway(2000);
+          let index = this.books.indexOf(book);
+          this.books.splice(index, 1);
+        })
+        .catch(e => {
+          this.serverError = 'delete';
+          this.$toasted.error("Ops... Ocorreu um erro!").goAway(2000);
+          console.log(e);
+        });
     },
     index() {
       this.service.list(this.currentPage)
