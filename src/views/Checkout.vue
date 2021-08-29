@@ -83,9 +83,9 @@ import { BFormInput } from 'bootstrap-vue';
 import { BFormFile } from 'bootstrap-vue';
 import { BFormTextarea } from 'bootstrap-vue';
 import axios from 'axios';
-import Section from '../shared/section/Section.vue';
+import Section from '../components/Section.vue';
 import { BAlert } from 'bootstrap-vue';
-import UserInfo from '../shared/user-info/UserInfo.vue';
+import UserInfo from '../components/UserInfo.vue';
 export default {
   components: {
     'b-container': BContainer,

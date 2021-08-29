@@ -54,7 +54,7 @@ import { BForm } from 'bootstrap-vue';
 import { BFormGroup } from 'bootstrap-vue';
 import { BFormInput } from 'bootstrap-vue';
 import axios from 'axios';
-import Section from '../shared/section/Section.vue';
+import Section from '../components/Section.vue';
 import { BCol } from 'bootstrap-vue';
 import { BRow } from 'bootstrap-vue';
 export default {

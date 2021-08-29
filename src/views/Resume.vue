@@ -44,8 +44,8 @@ import { BContainer } from 'bootstrap-vue';
 import { BRow } from 'bootstrap-vue';
 import { BCol } from 'bootstrap-vue';
 import { BButton } from 'bootstrap-vue'
-import Section from '../shared/section/Section.vue';
-import UserInfo from '../shared/user-info/UserInfo.vue';
+import Section from '../components/Section.vue';
+import UserInfo from '../components/UserInfo.vue';
 export default {
   components: {
     'b-container': BContainer,

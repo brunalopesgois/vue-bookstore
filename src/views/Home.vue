@@ -51,10 +51,10 @@
 
 <script>
 import { BContainer } from 'bootstrap-vue';
-import Panel from '../shared/panel/Panel.vue';
+import Panel from '../components/Panel.vue';
 import axios from 'axios';
 import { BPagination } from 'bootstrap-vue';
-import UserInfo from '../shared/user-info/UserInfo.vue';
+import UserInfo from '../components/UserInfo.vue';
 export default {
   data() {
     return {

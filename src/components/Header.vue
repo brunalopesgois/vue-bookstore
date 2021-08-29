@@ -9,7 +9,7 @@
 
 <script>
 import { BJumbotron } from 'bootstrap-vue';
-import Navbar from '../navbar/Navbar.vue';
+import Navbar from './Navbar.vue';
 export default {
   components: {
     'b-jumbotron': BJumbotron,
