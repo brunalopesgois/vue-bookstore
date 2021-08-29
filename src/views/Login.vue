@@ -9,6 +9,10 @@
           <b-col>
             <div class="form-panel d-flex justify-content-end">
               <b-form @submit="onSubmit">
+                <div class="login-info">
+                  <p><b>Admin</b>: admin@example.com | admin</p>
+                  <p><b>Client</b>: client@example.com | client</p>
+                </div>
                 <h1 class="login-title">LOGIN</h1>
                 <b-form-group
                   id="input-group"
@@ -129,5 +133,14 @@ export default {
 }
 #input-group {
   width: 350px;
+}
+.login-info {
+  border: 1px solid chocolate;
+  border-radius: 10px;
+  background-color: rgb(210, 105, 30, .3);
+  color: chocolate;
+  padding-top: 3%;
+  padding-left: 3%;
+  margin-bottom: 5%;
 }
 </style>
