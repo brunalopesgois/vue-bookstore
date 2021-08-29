@@ -2,21 +2,6 @@
   <div class="content">
     <my-user :name="user.name" :profile="user.profile"></my-user>
     <b-container fluid>
-      <b-alert
-        :show="dismissSuccessCountDown"
-        fade
-        variant="success"
-      >
-        <div v-if="this.id">Livro alterado com sucesso!</div>
-        <div v-else>Livro cadastrado com sucesso!</div>
-      </b-alert>
-      <b-alert
-        :show="dismissFailCountDown"
-        fade
-        variant="danger"
-      >
-        Ops... ocorreu um erro, tente novamente mais tarde!
-      </b-alert>
       <my-section>
         <div class="form-panel">
           <b-form @submit="onSubmit" @reset="onReset">
@@ -106,7 +91,6 @@ import { BFormFile } from 'bootstrap-vue';
 import { BFormTextarea } from 'bootstrap-vue';
 import axios from 'axios';
 import Section from '../components/Section.vue';
-import { BAlert } from 'bootstrap-vue';
 import UserInfo from '../components/UserInfo.vue';
 import BookService from '../services/book/BookService';
 export default {
@@ -118,7 +102,6 @@ export default {
     'b-form-file': BFormFile,
     'b-form-textarea': BFormTextarea,
     'my-section': Section,
-    'b-alert': BAlert,
     'my-user': UserInfo
   },
   data() {
@@ -157,10 +140,10 @@ export default {
         formData.append('_method', 'PUT');
         this.service.update(id, formData)
         .then(res => {
-          this.showSuccessAlert();
+           this.$toasted.success("Livro atualizado com sucesso!").goAway(2000);
         })
         .catch(e => {
-          this.showFailAlert();
+           this.$toasted.error("Ops... Ocorreu um erro!").goAway(2000);
           console.log(e);
         });
       }
@@ -168,10 +151,10 @@ export default {
       if (!id) {
         this.service.create(formData)
         .then(res => {
-          this.showSuccessAlert();
+           this.$toasted.success("Livro inserido com sucesso!").goAway(2000);
         })
         .catch(e => {
-          this.showFailAlert();
+          this.$toasted.error("Ops... Ocorreu um erro!").goAway(2000);
           console.log(e);
         });
       }
@@ -184,12 +167,6 @@ export default {
       this.form.desc = '';
       this.form.price = '';
       this.$refs['file'].reset();
-    },
-    showSuccessAlert() {
-      this.dismissSuccessCountDown = this.dismissSecs
-    },
-    showFailAlert() {
-      this.dismissFailCountDown = this.dismissSecs
     }
   },
   created() {
