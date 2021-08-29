@@ -86,6 +86,7 @@ import axios from 'axios';
 import Section from '../components/Section.vue';
 import { BAlert } from 'bootstrap-vue';
 import UserInfo from '../components/UserInfo.vue';
+import CheckoutService from '../services/checkout/CheckoutService';
 export default {
   components: {
     'b-container': BContainer,
@@ -114,21 +115,13 @@ export default {
       }
     }
   },
+  created() {
+    this.service = new CheckoutService();
+  },
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      axios.post(`/api/checkout/books/${this.id}`,
-      {
-        card_number: this.form.cardNumber,
-        owner_name: this.form.ownerName,
-        expiration_date: this.form.date,
-        cvv: this.form.securityNumber
-      },
-      {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-      })
+      this.service.create(this.id, this.form)
       .then(res => {
         this.success = true;
       })
