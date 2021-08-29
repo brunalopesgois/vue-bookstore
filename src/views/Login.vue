@@ -94,6 +94,8 @@ export default {
         this.storeUser();
       })
       .catch(e => {
+        let error = e.toJSON();
+        this.failedLogin(error.message);
         console.log(e);
       });
     },
@@ -111,6 +113,16 @@ export default {
       .catch(e => {
         console.log(e);
       });
+    },
+    failedLogin(errorMessage) {
+      if (errorMessage.includes('401')) {
+        this.$toasted.error("E-mail ou senha incorreto(s).").goAway(2000);
+        this.form.email = '';
+        this.form.password = '';
+        return;
+      }
+
+      this.$toasted.error("Ocorreu um erro interno. Tente novamente mais tarde.").goAway(2000);
     }
   }
 }
