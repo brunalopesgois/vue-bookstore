@@ -108,6 +108,7 @@ import axios from 'axios';
 import Section from '../components/Section.vue';
 import { BAlert } from 'bootstrap-vue';
 import UserInfo from '../components/UserInfo.vue';
+import BookService from '../services/book/BookService';
 export default {
   components: {
     'b-container': BContainer,
@@ -149,18 +150,12 @@ export default {
       formData.append('description', this.form.desc);
       formData.append('sale_price', this.form.price);
 
-      this.createOrUpdate(formData, this.id);
+      this.createOrUpdate(this.id, formData);
     },
-    createOrUpdate(formData, id) {
-      let response = '';
+    createOrUpdate(id, formData) {
       if (id) {
         formData.append('_method', 'PUT');
-        axios.post(`/api/books/${this.id}`, formData, {
-          headers: {
-            'Authorization': 'Bearer ' + localStorage.getItem('token'),
-            'Content-Type': 'multipart/form-data'
-          }
-        })
+        this.service.update(id, formData)
         .then(res => {
           this.showSuccessAlert();
         })
@@ -168,23 +163,18 @@ export default {
           this.showFailAlert();
           console.log(e);
         });
-
-        return;
       }
 
-      axios.post('/api/books', formData, {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token'),
-          'Content-Type': 'multipart/form-data'
-        }
-      })
-      .then(res => {
-        this.showSuccessAlert();
-      })
-      .catch(e => {
-        this.showFailAlert();
-        console.log(e);
-      });
+      if (!id) {
+        this.service.create(formData)
+        .then(res => {
+          this.showSuccessAlert();
+        })
+        .catch(e => {
+          this.showFailAlert();
+          console.log(e);
+        });
+      }
     },
     onReset(event) {
       event.preventDefault();
@@ -203,8 +193,10 @@ export default {
     }
   },
   created() {
+    this.service = new BookService();
+
     if (this.id) {
-      axios.get(`/api/books/${this.id}`)
+      this.service.findById(this.id)
       .then(res => {
         this.form.title = res.data.title,
         this.form.genre = res.data.genre,

@@ -46,6 +46,7 @@ import { BCol } from 'bootstrap-vue';
 import { BButton } from 'bootstrap-vue'
 import Section from '../components/Section.vue';
 import UserInfo from '../components/UserInfo.vue';
+import BookService from '../services/book/BookService';
 export default {
   components: {
     'b-container': BContainer,
@@ -84,9 +85,9 @@ export default {
     }
   },
   created() {
-    const axios = require('axios');
+    this.service = new BookService();
 
-    axios.get(`/api/books/${this.id}`)
+    this.service.findById(this.id)
       .then(res => {
         this.book.title = res.data.title,
         this.book.genre = res.data.genre,
