@@ -57,6 +57,8 @@ import axios from 'axios';
 import Section from '../components/Section.vue';
 import { BCol } from 'bootstrap-vue';
 import { BRow } from 'bootstrap-vue';
+import LoginService from '../services/auth/LoginService';
+import UserService from '../services/auth/UserService';
 export default {
   components: {
     'b-container': BContainer,
@@ -78,10 +80,10 @@ export default {
   methods: {
     onSubmit(event) {
       event.preventDefault();
-      axios.post('/api/login', {
-        email: this.form.email,
-        password: this.form.password
-      })
+
+      const loginService = new LoginService();
+
+      loginService.create(this.form.email, this.form.password)
       .then(res => {
         localStorage.setItem('token', res.data.generated_token);
         this.$router.back();
@@ -92,11 +94,9 @@ export default {
       });
     },
     storeUser() {
-      axios.get('/api/user', {
-        headers: {
-          'Authorization': 'Bearer ' + localStorage.getItem('token')
-        }
-      })
+      const userService = new UserService();
+
+      userService.find()
       .then(res => {
         let profile = res.data.profile.charAt(0).toUpperCase() + res.data.profile.slice(1);
 
