@@ -84,7 +84,6 @@ import { BFormFile } from 'bootstrap-vue';
 import { BFormTextarea } from 'bootstrap-vue';
 import axios from 'axios';
 import Section from '../components/Section.vue';
-import { BAlert } from 'bootstrap-vue';
 import UserInfo from '../components/UserInfo.vue';
 import CheckoutService from '../services/checkout/CheckoutService';
 export default {
@@ -96,7 +95,6 @@ export default {
     'b-form-file': BFormFile,
     'b-form-textarea': BFormTextarea,
     'my-section': Section,
-    'b-alert': BAlert,
     'my-user': UserInfo
   },
   data() {
@@ -126,6 +124,7 @@ export default {
         this.success = true;
       })
       .catch(e => {
+        this.$toasted.error("Não foi possível finalizar a compra. Tente novamente mais tarde.").goAway(3000);
         console.log(e);
       });
     },
