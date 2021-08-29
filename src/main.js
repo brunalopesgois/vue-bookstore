@@ -8,6 +8,7 @@ import { routes } from './routes/index';
 import Vuex from 'vuex';
 import axios from 'axios';
 import Toasted from 'vue-toasted';
+import Cleave from 'cleave.js';
 
 axios.defaults.baseURL = process.env.API_URL;
 
@@ -18,6 +19,19 @@ Vue.use(Vuex);
 Vue.use(Toasted, {
   iconPack: 'custom-class'
 });
+
+Vue.directive('cleave', {
+  inserted: (el, binding) => {
+      el.cleave = new Cleave(el, binding.value || {})
+  },
+  update: (el) => {
+      const event = new Event('input', {bubbles: true});
+      setTimeout(function () {
+          el.value = el.cleave.properties.result
+          el.dispatchEvent(event)
+      }, 100);
+  }
+})
 
 const router = new VueRouter({
   routes: routes,

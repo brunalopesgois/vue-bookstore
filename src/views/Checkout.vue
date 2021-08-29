@@ -14,7 +14,7 @@
                 id="input-1"
                 v-model="form.cardNumber"
                 type="text"
-                min="3"
+                v-cleave="{creditCard: true}"
                 required
               ></b-form-input>
             </b-form-group>
@@ -42,7 +42,9 @@
                 <b-form-input
                   id="input-3"
                   v-model="form.date"
-                  type="date"
+                  type="text"
+                  placeholder="Mês/Ano"
+                  v-cleave="{date: true,datePattern: ['m', 'Y'],delimiter:'/'}"
                   required
                 ></b-form-input>
               </b-form-group>
@@ -55,8 +57,8 @@
                 <b-form-input
                   id="input-4"
                   v-model="form.securityNumber"
-                  type="number"
-                  max="999"
+                  type="text"
+                  v-cleave="{numeral: true,numeralPositiveOnly: true,numeralIntegerScale: 3}"
                   required
                 ></b-form-input>
               </b-form-group>
