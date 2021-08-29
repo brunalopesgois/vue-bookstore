@@ -17,24 +17,7 @@
         <p class="error-message text-center">Ops... ocorreu um erro.</p>
         <img class="error-img d-flex justify-content-center" src="/src/assets/error.png" alt="">
       </div>
-      <b-alert
-        :show="dismissFailCountDown"
-        class="position-fixed fixed-top m-0 rounded-0"
-        style="z-index: 2000;"
-        fade
-        variant="danger"
-      >
-        Ops... não foi possível remover o registro!
-      </b-alert>
-      <b-alert
-        :show="dismissSuccessCountDown"
-        class="position-fixed fixed-top m-0 rounded-0"
-        style="z-index: 2000;"
-        fade
-        variant="success"
-      >
-        Livro removido com sucesso!
-      </b-alert>
+      <my-alert :show="show" :variant="variant">{{ message }}</my-alert>
       <section class="section">
         <ul class="book-list">
           <li class="book-list-item" v-for="book of books" :key="book.id">
@@ -55,15 +38,13 @@ import Panel from '../components/Panel.vue';
 import { BPagination } from 'bootstrap-vue';
 import UserInfo from '../components/UserInfo.vue';
 import BookService from '../services/book/BookService';
+import Alert from '../components/Alert.vue';
 export default {
   data() {
     return {
       books: [],
       filter: '',
       indexError: false,
-      dismissSecs: 5,
-      dismissSuccessCountDown: 0,
-      dismissFailCountDown: 0,
       currentPage: 1,
       rows: 0,
       perPage: 0,
@@ -71,14 +52,18 @@ export default {
       user: {
         name: localStorage.getItem('userName') ? localStorage.getItem('userName') : '',
         profile: localStorage.getItem('userProfile') ? localStorage.getItem('userProfile') : ''
-      }
+      },
+      show: 0,
+      variant: 'primary',
+      message: ''
     }
   },
   components: {
     'b-container': BContainer,
     'my-panel': Panel,
     'b-pagination': BPagination,
-    'my-user': UserInfo
+    'my-user': UserInfo,
+    'my-alert': Alert
   },
   methods: {
     remove(book) {
@@ -95,10 +80,14 @@ export default {
           });
     },
     showSuccessAlert() {
-      this.dismissSuccessCountDown = this.dismissSecs
+      this.variant = "success",
+      this.message = "Livro inserido com sucesso!"
+      this.show = 3;
     },
     showFailAlert() {
-      this.dismissFailCountDown = this.dismissSecs
+      this.variant = "danger",
+      this.message = "Ops... Ocorreu um erro!"
+      this.show = 3;
     },
     index() {
       this.service.list(this.currentPage)
