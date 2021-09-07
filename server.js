@@ -8,13 +8,11 @@ app = express()
 //add this middleware
 app.use(history());
 app.use(serveStatic(__dirname))
-var port = process.env.PORT || 5000
+var port = 80
 app.listen(port)
 console.log('server started '+ port)
-app.use(cors())
+var apiProxy = createProxyMiddleware('/api', { target: 'https://laravel-bookstore-api.herokuapp.com/' });
+var frontendProxy = createProxyMiddleware('/', { target: 'https://livrariabc.herokuapp.com/' });
 
-app.options('*', cors())
-
-app.listen(5000, function () {
-  console.log('CORS-enabled web server listening on port 80')
-})
+app.use(apiProxy);
+app.use(frontendProxy);
