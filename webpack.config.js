@@ -76,6 +76,12 @@ module.exports = {
     extensions: ['*', '.js', '.vue', '.json']
   },
   devServer: {
+    proxy: {
+      '/api': {
+        target: 'https://laravel-bookstore-api.herokuapp.com/',
+        secure: false,
+      },
+    },
     historyApiFallback: true,
     noInfo: true,
     overlay: true
