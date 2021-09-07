@@ -93,7 +93,7 @@ if (process.env.NODE_ENV === 'production') {
     new webpack.DefinePlugin({
       'process.env': {
         NODE_ENV: '"production"',
-        API_URL: '"http://enderecodasuaapi.com"'
+        API_URL: '"https://laravel-bookstore-api.herokuapp.com"'
       }
     }),
     new webpack.optimize.UglifyJsPlugin({
