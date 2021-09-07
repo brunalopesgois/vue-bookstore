@@ -2,9 +2,15 @@
 
 > Projeto de aplicação web simulando uma livraria, consome a api 'Laravel Bookstore API', disponível no meu github.
 
-### Importante: subir servidor da API na porta 8000.
+Disponível em:
 
-## Build Setup
+https://livrariabc.herokuapp.com/
+
+## Instalando em ambiente local
+
+**Importante: subir servidor da API na porta 8000.**
+
+### Build Setup
 
 ``` bash
 # install dependencies
