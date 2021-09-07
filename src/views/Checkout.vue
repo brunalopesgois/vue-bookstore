@@ -64,6 +64,40 @@
               </b-form-group>
             </div>
             <br>
+            <b-button id="popover-target-1" v-b-toggle="'collapse-1'" class="m-1" variant="warning">Desejo receber a confirmação da compra por email</b-button>
+            <b-popover target="popover-target-1" triggers="hover" placement="top">
+              <template #title>Informações</template>
+              Para usar a funcionalidade de mensageria, você pode criar um e-mail temporário no MailTrap e usar suas credenciais aqui.
+            </b-popover>
+            <b-collapse id="collapse-1">
+              <br>
+              <b-form-group
+                id="input-group-5"
+                label="Usuário:"
+                label-for="input-5"
+              >
+                <b-form-input
+                  id="input-5"
+                  placeholder="USER ou USERNAME do MailTrap"
+                  v-model="form.user"
+                  type="text"
+                ></b-form-input>
+              </b-form-group>
+              <br>
+              <b-form-group
+                id="input-group-6"
+                label="Senha:"
+                label-for="input-6"
+              >
+                <b-form-input
+                  id="input-6"
+                  placeholder="PASSWORD do MailTrap"
+                  v-model="form.password"
+                  type="text"
+                ></b-form-input>
+              </b-form-group>
+            </b-collapse>
+            <br>
             <div class="form-btn">
               <b-button type="submit" variant="success">Finalizar Compra</b-button>
               <b-button type="reset" variant="danger">Limpar</b-button>
@@ -88,6 +122,8 @@ import axios from 'axios';
 import Section from '../components/Section.vue';
 import UserInfo from '../components/UserInfo.vue';
 import CheckoutService from '../services/checkout/CheckoutService';
+import { BCollapse } from 'bootstrap-vue';
+import { BPopover } from 'bootstrap-vue';
 export default {
   components: {
     'b-container': BContainer,
@@ -97,7 +133,9 @@ export default {
     'b-form-file': BFormFile,
     'b-form-textarea': BFormTextarea,
     'my-section': Section,
-    'my-user': UserInfo
+    'my-user': UserInfo,
+    'b-collapse': BCollapse,
+    'b-popover': BPopover
   },
   data() {
     return {
@@ -105,7 +143,9 @@ export default {
         cardNumber: '',
         ownerName: '',
         date: '',
-        securityNumber: ''
+        securityNumber: '',
+        user: '',
+        password: ''
       },
       id: this.$route.params.id,
       success: false,

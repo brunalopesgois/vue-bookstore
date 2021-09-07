@@ -7,7 +7,9 @@ export default class CheckoutService {
         card_number: data.cardNumber,
         owner_name: data.ownerName,
         expiration_date: data.date,
-        cvv: data.securityNumber
+        cvv: data.securityNumber,
+        mailtrap_user: data.user,
+        mailtrap_password: data.password
       },
       {
         headers: {
