@@ -6,8 +6,7 @@ export default class BookService {
   }
 
   filter(value) {
-    let params = new URLSearchParams([['search', value]]);
-    return axios.get('/api/books', { params });
+    return axios.get(`/api/books?search=${value}`);
   }
 
   findById(id) {
