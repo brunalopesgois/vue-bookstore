@@ -4,7 +4,7 @@
 
 Disponível em:
 
-https://livrariabc.herokuapp.com/
+<a href="https://livrariabc.herokuapp.com/" target="_blank">Link</a>
 
 ## Instalando em ambiente local
 
