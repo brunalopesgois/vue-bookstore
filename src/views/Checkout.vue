@@ -67,33 +67,20 @@
             <b-button id="popover-target-1" v-b-toggle="'collapse-1'" class="m-1" variant="warning">Desejo receber a confirmação da compra por email</b-button>
             <b-popover target="popover-target-1" triggers="hover" placement="top">
               <template #title>Informações</template>
-              Para usar a funcionalidade de mensageria, você pode criar um e-mail temporário no MailTrap e usar suas credenciais aqui.
+              Para usar a funcionalidade de mensageria, inclua seu gmail, certifique-se de que a opção de permitir apps menos seguros esteja ativa.
             </b-popover>
             <b-collapse id="collapse-1">
               <br>
               <b-form-group
                 id="input-group-5"
-                label="Usuário:"
+                label="E-mail:"
                 label-for="input-5"
               >
                 <b-form-input
                   id="input-5"
-                  placeholder="USER ou USERNAME do MailTrap"
-                  v-model="form.user"
-                  type="text"
-                ></b-form-input>
-              </b-form-group>
-              <br>
-              <b-form-group
-                id="input-group-6"
-                label="Senha:"
-                label-for="input-6"
-              >
-                <b-form-input
-                  id="input-6"
-                  placeholder="PASSWORD do MailTrap"
-                  v-model="form.password"
-                  type="text"
+                  placeholder="Seu e-mail..."
+                  v-model="form.mail"
+                  type="email"
                 ></b-form-input>
               </b-form-group>
             </b-collapse>
@@ -144,8 +131,7 @@ export default {
         ownerName: '',
         date: '',
         securityNumber: '',
-        user: '',
-        password: ''
+        mail: ''
       },
       id: this.$route.params.id,
       success: false,
