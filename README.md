@@ -1,10 +1,12 @@
-# Vue Bookstore
+# Vue Bookstore 🦉
+
+![Status](https://badgen.net/badge/app/up/green)
 
 > Projeto de aplicação web simulando uma livraria, consome a api 'Laravel Bookstore API', disponível no meu github.
 
 Disponível em:
 
-<a href="https://livrariabc.herokuapp.com/" target="_blank">Link</a>
+<a href="https://vue-bookstore.fly.dev/" target="_blank">Link</a>
 
 ## Instalando em ambiente local
 
@@ -12,7 +14,7 @@ Disponível em:
 
 ### Build Setup
 
-``` bash
+```bash
 # install dependencies
 npm install
 
